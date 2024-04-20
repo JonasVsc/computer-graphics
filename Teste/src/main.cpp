@@ -1,18 +1,25 @@
-#include<iostream>
-#include<vector>
+#include<SDL2\SDL.H>
 
-int main()
-{
-	std::vector<int> vec {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+#include <iostream>
 
-	printf("[ ");
-	for(const auto &i : vec)
-	{
-		printf("%d ", i);
-	}
-	printf("]\n");
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
 
+int main(int arc, char ** argv) {
 
-	getchar();
-	return 0;
+    if (SDL_Init( SDL_INIT_VIDEO ) < 0) {
+        std::cout << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
+    } else {
+        
+        SDL_CreateWindow(
+            "SDL2 Demo",
+            SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+            SCREEN_WIDTH, SCREEN_HEIGHT,
+            SDL_WINDOW_SHOWN
+        );
+        
+        SDL_Delay(2000);
+    }
+    
+    return 0;
 }
