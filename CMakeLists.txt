@@ -15,3 +15,4 @@ add_subdirectory(thirdparty/SDL)
 #######################
 add_subdirectory(Teste)
 add_subdirectory(SnakeGame)
+add_subdirectory(introduction-SDL)
