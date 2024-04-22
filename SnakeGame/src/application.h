@@ -1,11 +1,17 @@
+#ifndef __APP_H__
+#define __APP_H__
+
 #include<GL\glew.h>
 #include<GLFW\glfw3.h>
 
-class core 
+class application
 {
 public:
-	core();
+	application();
 	void init(int width, int height, const char *title);
+	void render();
 	GLFWwindow* window;
-private:
 };
+
+
+#endif
