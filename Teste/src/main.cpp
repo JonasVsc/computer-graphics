@@ -2,6 +2,8 @@
 #include<GLFW/glfw3.h>
 #include<glm\glm.hpp>
 
+#include<iostream>
+
 int main()
 {
 
@@ -13,6 +15,10 @@ int main()
 	glfwMakeContextCurrent(window);
 
 	glClearColor(0.1f, 0.2f, 0.6f, 0.0f);
+
+	glm::mat4 mat = glm::mat4(1.0f);
+
+	std::cout << mat[0][0];
 
 	while(!glfwWindowShouldClose(window))
 	{
