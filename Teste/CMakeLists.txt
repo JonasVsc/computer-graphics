@@ -8,6 +8,6 @@ message(STATUS "BUILD ${PROJECT_NAME}!")
 target_link_libraries(${PROJECT_NAME} glfw)
 target_link_libraries(${PROJECT_NAME} libglew_static)
 target_link_libraries(${PROJECT_NAME} glm)
-target_link_libraries(${PROJECT_NAME} SDL3-static)
+target_link_libraries(${PROJECT_NAME} SDL2-static)
 
 
