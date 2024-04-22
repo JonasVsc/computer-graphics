@@ -7,3 +7,7 @@
 [submodule "thirdparty/glm"]
 	path = thirdparty/glm
 	url = https://github.com/g-truc/glm.git
+[submodule "thirdparty/SDL"]
+	path = thirdparty/SDL
+	url = https://github.com/libsdl-org/SDL.git
+	branch = SDL2
