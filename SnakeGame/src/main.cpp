@@ -1,11 +1,16 @@
 #include"application.h"
+#include"shader.h"
 
 int main()
 {
-
 	application snake;
 	snake.init(1024, 768, "Snake Game");
 
+	if(!shader("shaders/vertexShader.vs", "shaders/fragmentShader.fs"))
+	{
+		std::cerr << "ERROR SHADER PROGRAM\n";
+	}
+	
 
 	GLuint VAO;
 	glGenVertexArrays(1, &VAO);
@@ -27,7 +32,6 @@ int main()
 	glGenBuffers(1, &EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
 
 	GLuint player;
 	glGenBuffers(1, &player);
