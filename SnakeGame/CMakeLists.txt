@@ -10,6 +10,10 @@ add_executable(${PROJECT_NAME}
 	# Shaders
 	src/shader.h
 	src/shader.cpp
+
+	# Entity
+	src/entity.h
+	src/entity.cpp
 )
 
 

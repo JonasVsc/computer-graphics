@@ -22,3 +22,10 @@ void application::init(int width, int height, const char *title)
 	}
 }
 
+void application::input_listen()
+{
+	if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GL_TRUE);
+	
+}
+

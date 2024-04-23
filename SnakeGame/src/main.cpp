@@ -10,8 +10,8 @@ const float SCREEN_HEIGHT {768};
 
 int main()
 {
-	application snake;
-	snake.init(SCREEN_WIDTH, SCREEN_HEIGHT, "Snake Game");
+	application snake_game;
+	snake_game.init(SCREEN_WIDTH, SCREEN_HEIGHT, "Snake Game");
 
 	shader my_shader("shaders/vertexShader.vs", "shaders/fragmentShader.fs");
 
@@ -47,8 +47,15 @@ int main()
 	glBindVertexArray(0);
 	glClearColor(0.1f, 0.2f, 0.6f, 1.0f);
 
-	while(!glfwWindowShouldClose(snake.window))
+	while(!glfwWindowShouldClose(snake_game.window))
 	{
+		// process inputs
+		// --------------
+		snake_game.input_listen();
+
+
+		// render
+		// ------
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(my_shader.program);
@@ -76,9 +83,10 @@ int main()
 		// render
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-		glfwSwapBuffers(snake.window);
+		glfwSwapBuffers(snake_game.window);
 		glfwPollEvents();
 	}
 
 	return 0;
 }
+
