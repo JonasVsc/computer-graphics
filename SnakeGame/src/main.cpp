@@ -31,10 +31,11 @@ int main()
 
 	GLuint player;
 	glGenBuffers(1, &player);
-	glBindBuffer(GL_VERTEX_ARRAY, player);
-	glBufferData(GL_VERTEX_ARRAY, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, player);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	glEnableVertexAttribArray(0);
 
 	glBindVertexArray(0);
 	glClearColor(0.1f, 0.2f, 0.6f, 1.0f);
@@ -43,8 +44,10 @@ int main()
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		glUseProgram(my_shader.program);
+
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(snake.window);
 		glfwPollEvents();

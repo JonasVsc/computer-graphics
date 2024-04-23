@@ -2,15 +2,27 @@
 
 
 shader::shader(const char *p_vertex_file_path, const char *p_fragment_file_path)
+	:	program{glCreateProgram()}
+	,	vertex_shader{glCreateShader(GL_VERTEX_SHADER)}
+	,	fragment_shader{glCreateShader(GL_FRAGMENT_SHADER)}
 {
-	const char* p_vertex_shader = read_file(p_vertex_file_path);
-	const char* p_fragment_shader = read_file(p_fragment_file_path);
+	const char* p_vertex_shader_source = read_file(p_vertex_file_path);
+	const char* p_fragment_shader_source = read_file(p_fragment_file_path);
 
-	// create shader program then compile
-	create_shader(p_vertex_shader, GL_VERTEX_SHADER);
-	create_shader(p_fragment_shader, GL_FRAGMENT_SHADER);
+	// compile shaders
+	glShaderSource(vertex_shader, 1, &p_vertex_shader_source, NULL);
+	glShaderSource(fragment_shader, 1, &p_fragment_shader_source, NULL);
 
-	// create program
+	glCompileShader(vertex_shader);
+	catch_shader_compile_errors(vertex_shader);
+
+	glCompileShader(fragment_shader);
+	catch_shader_compile_errors(fragment_shader);
+
+	glAttachShader(program, vertex_shader);
+	glAttachShader(program, fragment_shader);
+	glLinkProgram(program);
+	catch_program_compile_errors(program);
 }
 
 const char* shader::read_file(const char *p_shader_file_path)
@@ -24,7 +36,7 @@ const char* shader::read_file(const char *p_shader_file_path)
 	// -----------
 	if(!file.is_open())
 	{
-		std::cerr << "Error opening file\n";
+		std::cerr << "ERROR file not found or can't open file\n";
 	}
 
 	// read file
@@ -44,25 +56,7 @@ const char* shader::read_file(const char *p_shader_file_path)
 	return file_code;
 }
 
-void shader::create_shader(const char *p_shader_code, GLenum shaderType)
-{
-	GLuint shader = glCreateShader(shaderType);
-	glCompileShader(shader);
-
-	// catch compile errors
-	if(!catch_compile_errors(shader))
-	{
-		std::string type {"UNDEFINED"};
-		if(shaderType == GL_VERTEX_SHADER)
-			type = "GL_VERTEX_SHADER";
-		if(shaderType == GL_VERTEX_SHADER)
-			type = "GL_FRAGMENT_SHADER";
-
-		std::cerr << "ERROR COMPILATION " << type;
-	}
-}
-
-bool shader::catch_compile_errors(GLuint shader)
+void shader::catch_shader_compile_errors(GLuint shader)
 {
 	int shader_compiled;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &shader_compiled);
@@ -72,48 +66,21 @@ bool shader::catch_compile_errors(GLuint shader)
 	    GLchar message[1024];
 	    glGetShaderInfoLog(shader, 1024, &log_length, message);
 	    std::cerr << message << '\n';
-	    return false;
 	}
-	return true;
+}
+
+void shader::catch_program_compile_errors(GLuint program)
+{
+	GLint program_linked;
+	glGetProgramiv(program, GL_LINK_STATUS, &program_linked);
+	if(program_linked != GL_TRUE)
+	{
+		GLsizei log_length = 0;
+		GLchar message[1024];
+		glGetProgramInfoLog(program, 1024, &log_length, message);
+	    std::cerr << message << '\n';
+	}
+	std::cout << "no errors";
 }
 
 
-
-// void shader::read_file(const char *p_file_path)
-// {
-// 	std::fstream file;
-
-// 	file.open(p_file_path, std::fstream::in);
-// 	if(!file.is_open())
-// 	{
-// 		std::cerr << "Error opening file\n";
-// 	}
-// 	std::stringstream fileStream;
-// 	fileStream << file.rdbuf();
-
-// 	// convert to str then c_str
-// 	// =========================
-// 	std::string file_code_str = fileStream.str();
-// 	const char* file_code_c_str = file_code_str.c_str();
-
-// 	file.close();
-// }
-
-// void shader::compile_shader(const char *p_shader_code)
-// {
-// 	GLuint shader = glCreateShader(GL_VERTEX_SHADER);
-// }
-
-// void shader::catch_compile_errors()
-// {
-// 	int vertex_compiled;
-// 	glGetShaderiv(p_shader_code, GL_COMPILE_STATUS, &vertex_compiled);
-// 	if(vertex_compiled != GL_TRUE)
-// 	{
-// 		GLsizei log_length = 0;
-// 	    GLchar message[1024];
-// 	    glGetShaderInfoLog(vertexShader, 1024, &log_length, message);
-// 	    std::cerr << message << '\n';
-// 	    return false;
-// 	}
-// }

@@ -15,11 +15,14 @@ public:
 	shader(const char *p_vertex_file_path, const char *p_fragment_file_path);
 
 	static const char* read_file(const char *p_shader_file_path);
-    static void create_shader(const char *p_shader_code, GLenum shaderType);
+    static void create_program();
 
 	GLuint program;
+	GLuint vertex_shader;
+	GLuint fragment_shader;
 private:
-	static bool catch_compile_errors(GLuint shader);
+	static void catch_shader_compile_errors(GLuint shader);
+	static void catch_program_compile_errors(GLuint program);
 
 };
 
