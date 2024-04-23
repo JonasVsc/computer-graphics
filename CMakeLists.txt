@@ -11,5 +11,5 @@ add_subdirectory(thirdparty/glfw)
 add_subdirectory(thirdparty/glm)
 add_subdirectory(thirdparty/glew-cmake)
 #######################################
-
+ 
 add_subdirectory(SnakeGame)

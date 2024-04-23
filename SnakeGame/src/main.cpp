@@ -1,10 +1,17 @@
 #include"application.h"
 #include"shader.h"
 
+#include<glm\glm.hpp>
+#include<glm\gtc\matrix_transform.hpp>
+#include<glm\gtc\type_ptr.hpp>
+
+const float SCREEN_WIDTH {1024};
+const float SCREEN_HEIGHT {768};
+
 int main()
 {
 	application snake;
-	snake.init(1024, 768, "Snake Game");
+	snake.init(SCREEN_WIDTH, SCREEN_HEIGHT, "Snake Game");
 
 	shader my_shader("shaders/vertexShader.vs", "shaders/fragmentShader.fs");
 
@@ -45,8 +52,28 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(my_shader.program);
-
 		glBindVertexArray(VAO);
+
+		glm::mat4 view = glm::mat4(1.0f);
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.0, 0.0, -1.0));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -30.0f));
+
+		glm::mat4 projection = glm::mat4(1.0f);
+		projection = glm::perspective(glm::radians(45.0f), SCREEN_WIDTH / SCREEN_HEIGHT, 0.1f, 100.0f);
+
+		unsigned int projection_location = glGetUniformLocation(my_shader.program, "projection");
+		glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
+
+		unsigned int view_location = glGetUniformLocation(my_shader.program, "view");
+		glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
+
+		unsigned int model_location = glGetUniformLocation(my_shader.program, "model");
+		glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(model));
+
+		// render
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(snake.window);
