@@ -6,11 +6,7 @@ int main()
 	application snake;
 	snake.init(1024, 768, "Snake Game");
 
-	if(!shader("shaders/vertexShader.vs", "shaders/fragmentShader.fs"))
-	{
-		std::cerr << "ERROR SHADER PROGRAM\n";
-	}
-	
+	shader my_shader("shaders/vertexShader.vs", "shaders/fragmentShader.fs");
 
 	GLuint VAO;
 	glGenVertexArrays(1, &VAO);
@@ -48,7 +44,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
 
 		glfwSwapBuffers(snake.window);
 		glfwPollEvents();

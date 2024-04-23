@@ -9,6 +9,7 @@ add_executable(${PROJECT_NAME}
 
 	# Shaders
 	src/shader.h
+	src/shader.cpp
 )
 
 

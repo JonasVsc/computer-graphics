@@ -5,37 +5,22 @@
 #include<sstream>
 #include<iostream>
 
-bool shader(const char* vertexShaderSource, const char* fragmentShaderSource)
+#include<GL\glew.h>
+#include<GLFW\glfw3.h>
+
+
+class shader
 {
-	std::fstream file;
+public:
+	shader(const char *p_vertex_file_path, const char *p_fragment_file_path);
 
-	// LOAD VERTEX SHADER
-	file.open(vertexShaderSource, std::fstream::in);
-	if(!file.is_open())
-	{
-		std::cerr << "Error opening vertexShaderSource file\n";
-		return false;
-	}
-	std::cout << "VertexShaderSource Opened!\n";
-	std::stringstream vertexShaderStream;
-	vertexShaderStream << file.rdbuf();
-	std::string vertexCode = vertexShaderStream.str();
-	file.close();
+	static const char* read_file(const char *p_shader_file_path);
+    static void create_shader(const char *p_shader_code, GLenum shaderType);
 
-	// LOAD FRAGMENT SHADER
-	file.open(fragmentShaderSource, std::fstream::in);
-	if(!file.is_open())
-	{	
-		std::cerr << "Error opening fragmentShaderSource file\n";
-		return false;
-	}
-	std::cout << "FragmentShaderSource Opened!\n";
-	std::stringstream fragmentShaderStream;
-	fragmentShaderStream << file.rdbuf();
-	std::string fragmentCode = fragmentShaderStream.str();
-	file.close();
-	
-	return true;
-}
+	GLuint program;
+private:
+	static bool catch_compile_errors(GLuint shader);
+
+};
 
 #endif
