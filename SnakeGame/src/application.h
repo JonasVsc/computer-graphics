@@ -9,7 +9,6 @@ class application
 public:
 	application();
 	void init(int width, int height, const char *title);
-	void render();
 	GLFWwindow* window;
 };
 

@@ -21,13 +21,3 @@ void application::init(int width, int height, const char *title)
 	}
 }
 
-void application::render()
-{
-	while(!glfwWindowShouldClose(window))
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
-}
