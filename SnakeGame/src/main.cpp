@@ -17,7 +17,7 @@ int main()
 
 	// camera init
 	// -----------
-	camera debug_camera(snake_game.window, my_shader.program, glm::vec3(0.0f, 0.0f, -3.0f));
+	camera debug_camera(snake_game.window, my_shader.program);
 
 	while(!glfwWindowShouldClose(snake_game.window))
 	{
