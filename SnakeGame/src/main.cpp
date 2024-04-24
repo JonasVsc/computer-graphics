@@ -26,13 +26,40 @@ int main()
 		// --------------
 		snake_game.input_listen();
 
+		if(glfwGetKey(snake_game.window, GLFW_KEY_R) == GLFW_PRESS)
+		{
+			if(glfwGetKey(snake_game.window, GLFW_KEY_UP) == GLFW_PRESS &&
+			player.m_r <= 1)
+				player.m_r += 0.001;
+			if(glfwGetKey(snake_game.window, GLFW_KEY_DOWN) == GLFW_PRESS &&
+			player.m_r >= 0)
+				player.m_r -= 0.001;
+		}
+		if(glfwGetKey(snake_game.window, GLFW_KEY_G) == GLFW_PRESS)
+		{
+			if(glfwGetKey(snake_game.window, GLFW_KEY_UP) == GLFW_PRESS &&
+			player.m_g <= 1)
+				player.m_g += 0.001;
+			if(glfwGetKey(snake_game.window, GLFW_KEY_DOWN) == GLFW_PRESS &&
+			player.m_g >= 0)
+				player.m_g -= 0.001;
+		}
+		if(glfwGetKey(snake_game.window, GLFW_KEY_B) == GLFW_PRESS)
+		{
+			if(glfwGetKey(snake_game.window, GLFW_KEY_UP) == GLFW_PRESS &&
+			player.m_b <= 1)
+				player.m_b += 0.001;
+			if(glfwGetKey(snake_game.window, GLFW_KEY_DOWN) == GLFW_PRESS &&
+			player.m_b >= 0)
+				player.m_b -= 0.001;
+		}
 		
 		glClear(GL_COLOR_BUFFER_BIT);
 
 
 		// render
 		// ------
-		player.set_color(my_shader.program, 0.0f, 1.0f, 0.0f);
+		player.set_color(my_shader.program, player.m_r, player.m_g, player.m_b);
 		glUseProgram(my_shader.program);
 		player.render();
 

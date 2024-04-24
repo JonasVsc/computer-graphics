@@ -36,6 +36,10 @@ void entity::render()
 
 void entity::set_color(GLuint &program, float r, float g, float b)
 {
+	m_r = r;
+	m_g = g;
+	m_b = b;
+
 	GLuint color_location = glGetUniformLocation(program, "color");
-	glUniform3f(color_location, 1.0f, 0.5f, 0.0f);
+	glUniform3f(color_location, m_r, m_g, m_b);
 }
