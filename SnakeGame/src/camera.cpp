@@ -27,6 +27,7 @@ void camera::move()
 	last_frame = current_frame;  
 
 	const float camera_speed {2.5f * delta_time};
+	const float camera_y_speed {1.8f * delta_time};
 	if(glfwGetKey(m_window, GLFW_KEY_W) == GLFW_PRESS)
 		m_camera_pos += camera_speed * m_camera_front;
 	if(glfwGetKey(m_window, GLFW_KEY_S) == GLFW_PRESS)
@@ -36,9 +37,9 @@ void camera::move()
 	if(glfwGetKey(m_window, GLFW_KEY_D) == GLFW_PRESS)
 		m_camera_pos += glm::normalize(glm::cross(m_camera_front, m_camera_up)) * camera_speed;
 	if(glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS)
-		m_camera_pos += camera_speed * m_camera_up;
+		m_camera_pos += camera_y_speed * m_camera_up;
 	if(glfwGetKey(m_window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
-		m_camera_pos -= camera_speed * m_camera_up;
+		m_camera_pos -= camera_y_speed * m_camera_up;
 
 
 	std::cout << "(" << m_camera_pos.x << ", " << m_camera_pos.y << ", " << m_camera_pos.z << ")\n";
