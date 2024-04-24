@@ -30,6 +30,20 @@ int main()
 		
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		// model-view-projection
+
+		// model      -> entitys
+		// view       -> *
+		// projection -> *
+
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.2, 0.2, 0.2));
+		
+
+		GLuint model_location = glGetUniformLocation(my_shader.program, "model");
+		glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(model));
+
 
 		// render
 		// ------
