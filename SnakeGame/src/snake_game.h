@@ -11,6 +11,6 @@
 #include"application.h"
 #include"shader.h"
 #include"entity.h"
-
+#include"camera.h"
 
 #endif

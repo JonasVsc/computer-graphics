@@ -14,6 +14,11 @@ int main()
 	entity player;
 	glClearColor(0.1f, 0.2f, 0.6f, 1.0f);
 
+
+	// camera init
+	// -----------
+	camera debug_camera(my_shader.program, glm::vec3(0.0f, 0.0f, -3.0f));
+
 	while(!glfwWindowShouldClose(snake_game.window))
 	{
 		// process inputs
@@ -43,13 +48,15 @@ int main()
 
 		// view
 		// ----
-		glm::mat4 view = glm::mat4(1.0f);
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+		// glm::mat4 view = glm::mat4(1.0f);
+		// view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 
 		// view-location
 		// -------------
-		GLuint view_location = glGetUniformLocation(my_shader.program, "view");
-		glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
+		// GLuint view_location = glGetUniformLocation(my_shader.program, "view");
+		// glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
+
+		debug_camera.view();
 
 		// projection
 		// ----------
