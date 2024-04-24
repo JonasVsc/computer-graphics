@@ -8,17 +8,19 @@
 #include<glm\gtc\matrix_transform.hpp>
 #include<glm\gtc\type_ptr.hpp>
 
+
 class camera
 {
 public:
-	camera(GLuint shader_program, glm::vec3 pos);
+	camera(GLFWwindow* window, GLuint shader_program, glm::vec3 pos);
 	void view();
+	void move();
 
 private:
 	glm::vec3 m_cameraPos;
 	GLuint m_shader_program;
+	GLFWwindow* m_window;
 
-	void move_camera();
 
 };
 

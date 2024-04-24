@@ -17,7 +17,7 @@ int main()
 
 	// camera init
 	// -----------
-	camera debug_camera(my_shader.program, glm::vec3(0.0f, 0.0f, -3.0f));
+	camera debug_camera(snake_game.window, my_shader.program, glm::vec3(0.0f, 0.0f, -3.0f));
 
 	while(!glfwWindowShouldClose(snake_game.window))
 	{
@@ -25,6 +25,7 @@ int main()
 		// --------------
 		snake_game.input_listen();
 		player.input_rgb_controller(snake_game.window);
+		debug_camera.move();
 		
 		
 		glClear(GL_COLOR_BUFFER_BIT);
