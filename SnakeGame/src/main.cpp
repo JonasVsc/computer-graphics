@@ -32,6 +32,7 @@ int main()
 
 		// render
 		// ------
+		player.set_color(my_shader.program, 0.0f, 1.0f, 0.0f);
 		glUseProgram(my_shader.program);
 		player.render();
 

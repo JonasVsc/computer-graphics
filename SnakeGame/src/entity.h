@@ -11,6 +11,7 @@ class entity
 public:
 	entity();
 	void render();
+	void set_color(GLuint &program, float r, float g, float b);
 private:
 	GLuint m_vertex_array_object;
 	GLuint m_vertex_buffer;
