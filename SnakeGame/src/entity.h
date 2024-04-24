@@ -1,19 +1,20 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
+#include"glm\glm.hpp"
+
+#include<GL\glew.h>
+#include<GLFW\glfw3.h>
 
 class entity
 {
 public:
 	entity();
-
-	void set_shape();
-	void set_color();
-	void set_texture();
-
-
+	void render();
 private:
-	const char* m_name;
+	GLuint m_vertex_array_object;
+	GLuint m_vertex_buffer;
+	float m_vertices[9];
 };
 
 
