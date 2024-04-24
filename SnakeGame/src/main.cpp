@@ -1,10 +1,4 @@
-#include"application.h"
-#include"shader.h"
-#include"entity.h"
-
-#include<glm\glm.hpp>
-#include<glm\gtc\matrix_transform.hpp>
-#include<glm\gtc\type_ptr.hpp>
+#include"snake_game.h"
 
 const float SCREEN_WIDTH {1024};
 const float SCREEN_HEIGHT {768};

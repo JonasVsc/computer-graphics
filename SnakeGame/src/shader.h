@@ -1,12 +1,12 @@
 #ifndef __SHADER_H__
 #define __SHADER_H__
 
+#include<GL\glew.h>
+#include<GLFW\glfw3.h>
+
 #include<fstream>
 #include<sstream>
 #include<iostream>
-
-#include<GL\glew.h>
-#include<GLFW\glfw3.h>
 
 
 class shader

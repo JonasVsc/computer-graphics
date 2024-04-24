@@ -1,8 +1,6 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
-#include"glm\glm.hpp"
-
 #include<GL\glew.h>
 #include<GLFW\glfw3.h>
 

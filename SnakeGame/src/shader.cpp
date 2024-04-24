@@ -80,7 +80,6 @@ void shader::catch_program_compile_errors(GLuint program)
 		glGetProgramInfoLog(program, 1024, &log_length, message);
 	    std::cerr << message << '\n';
 	}
-	std::cout << "no errors";
 }
 
 
