@@ -30,14 +30,11 @@ void entity::render()
 {
 	glBindVertexArray(m_vertex_array_object);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glBindVertexArray(0);
 }
 
-void entity::set_color(GLuint &program, float r, float g, float b)
+void entity::set_color(GLuint &program)
 {
-	m_r = r;
-	m_g = g;
-	m_b = b;
-
 	GLuint color_location = glGetUniformLocation(program, "color");
 	glUniform3f(color_location, m_r, m_g, m_b);
 }

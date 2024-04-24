@@ -11,7 +11,10 @@ int main()
 	shader my_shader("shaders/vertexShader.vs", "shaders/fragmentShader.fs");
 
 
+	// objects
 	entity player;
+	entity object;
+
 	glClearColor(0.1f, 0.2f, 0.6f, 1.0f);
 
 
@@ -30,33 +33,8 @@ int main()
 		
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		// model-view-projection
-
-		// model      -> entitys
-		// view       -> *
-		// projection -> *
-
-		// model
-		// -----
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::scale(model, glm::vec3(0.2, 0.2, 0.2));
-
-		// model-location
-		// --------------
-		GLuint model_location = glGetUniformLocation(my_shader.program, "model");
-		glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(model));
 
 		// view
-		// ----
-		// glm::mat4 view = glm::mat4(1.0f);
-		// view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-
-		// view-location
-		// -------------
-		// GLuint view_location = glGetUniformLocation(my_shader.program, "view");
-		// glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
-
 		debug_camera.view();
 
 		// projection
@@ -70,13 +48,45 @@ int main()
 		glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
 
 
-		// render
+		// render player
 		// ------
-		player.set_color(my_shader.program, player.m_r, player.m_g, player.m_b);
+		player.set_color(my_shader.program);
+
+		// model_player
+		// -----
+		glm::mat4 model_player = glm::mat4(1.0f);
+		model_player = glm::rotate(model_player, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		model_player = glm::scale(model_player, glm::vec3(0.2, 0.2, 0.2));
+
+		// model_player-location
+		// --------------
+		GLuint model_player_location = glGetUniformLocation(my_shader.program, "model");
+		glUniformMatrix4fv(model_player_location, 1, GL_FALSE, glm::value_ptr(model_player));
+
 		glUseProgram(my_shader.program);
 		player.render();
 
-		glBindVertexArray(0);
+		// render object
+		// -------------
+		object.set_color(my_shader.program);
+
+		// model
+		// -----
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.2, 0.2, 0.2));
+		model = glm::translate(model, glm::vec3(2.0, -3.0, 5.0));
+
+		// model-location
+		// --------------
+		GLuint model_location = glGetUniformLocation(my_shader.program, "model");
+		glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(model));
+
+		glUseProgram(my_shader.program);
+		object.render();
+
+
+
+
 
 		glfwSwapBuffers(snake_game.window);
 		glfwPollEvents();

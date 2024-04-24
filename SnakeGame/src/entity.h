@@ -9,7 +9,7 @@ class entity
 public:
 	entity();
 	void render();
-	void set_color(GLuint &program, float r, float g, float b);
+	void set_color(GLuint &program);
 	void input_rgb_controller(GLFWwindow* window);
 	float m_r {};
 	float m_g {};
