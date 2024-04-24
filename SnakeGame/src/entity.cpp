@@ -1,8 +1,6 @@
 #include"entity.h"
 
 
-
-
 entity::entity()
 {
 	glGenVertexArrays(1, &m_vertex_array_object);
@@ -42,4 +40,35 @@ void entity::set_color(GLuint &program, float r, float g, float b)
 
 	GLuint color_location = glGetUniformLocation(program, "color");
 	glUniform3f(color_location, m_r, m_g, m_b);
+}
+
+void entity::input_rgb_controller(GLFWwindow* window)
+{
+	if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+	{
+		if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS &&
+		m_r <= 1)
+			m_r += 0.001;
+		if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS &&
+		m_r >= 0)
+			m_r -= 0.001;
+	}
+	if(glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+	{
+		if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS &&
+		m_g <= 1)
+			m_g += 0.001;
+		if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS &&
+		m_g >= 0)
+			m_g -= 0.001;
+	}
+	if(glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
+	{
+		if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS &&
+		m_b <= 1)
+			m_b += 0.001;
+		if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS &&
+		m_b >= 0)
+			m_b -= 0.001;
+	}
 }
