@@ -5,7 +5,6 @@ using namespace std;
 struct Point;
 bool special_case(Point& A, Point &B);
 const TGAColor white = TGAColor(255, 255, 255, 255);
-const TGAColor red   = TGAColor(255, 0,   0,   255);
 TGAImage image(100, 100, TGAImage::RGB);
 
 /*
@@ -82,23 +81,21 @@ struct Point
 	int V;
 	Point(int u, int v) :U{u}, V{v} {}
 };
-   //   (U ,V)
 
 int main()
 {
-	cout << "Rasterization implementation" << '\n';
-
 	
-	// INPUT ENDPOINTS
-	Point A (1,5);
-	Point B (12,9);
+	// INPUT ENDPOINTS | USE NUMBERS 0..100
+	Point A (0,0);
+	Point B (24, 14);
 
-
+	// VERIFY SPECIAL CASE
 	if(!special_case(A,B))
 	{
 		cerr << "[ERROR]   U1 > U2 OR V1 > V2!  Finishing program!" << '\n';
 		return 0;
 	}
+
 
 
 	// INCREMENTAL LINE ALGORITHM
@@ -113,13 +110,11 @@ int main()
 	}
 
 	// INCREMENTAL LINE ALGORITHM END
-
-	
+	// IF YOU WANT TO SEE THE LINE YOU CREATED AN PNG FILE WAS CREATED IN BUILD FOLDER
 
 	image.flip_vertically();
 	image.write_tga_file("output.png");
 
-	cin.get();
 	return 0;
 }
 
@@ -130,7 +125,7 @@ bool special_case(Point& A, Point &B)
 {
 	if(A.U < B.U && A.V < B.V)
 	{
-		return true; // error
+		return true; // ok
 	}
-	return false;
+	return false; // error
 }
