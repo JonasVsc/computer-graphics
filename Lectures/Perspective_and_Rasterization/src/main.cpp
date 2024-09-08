@@ -1,14 +1,12 @@
-#include<GL\glew.h>
+#include<GL/glew.h>
 #include<GLFW/glfw3.h>
-#include<glm\glm.hpp>
+#include<glm/glm.hpp>
 
 #include<iostream>
 
 int main()
 {
-
 	GLFWwindow* window;
-
 	glfwInit();
 
 	window = glfwCreateWindow(1024, 768, "Teste OpenGL", NULL, NULL);
