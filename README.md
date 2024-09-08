@@ -1,4 +1,4 @@
-# Project Title
+# Computer Graphics
 
 **⚠️ This repository is currently in development.**
 
