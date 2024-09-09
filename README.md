@@ -29,6 +29,7 @@ Instructions on how to set up the project locally. You will need have cmake in y
 3. Install Projects 3rdparty using git submodule
     ```sh
     git submodule init
+    git submodule update
     ```
 4. Build project using cmake
     ```sh
