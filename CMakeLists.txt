@@ -33,3 +33,4 @@ add_subdirectory(3rdparty/glm)
 
 #==============================================================================
 add_subdirectory(Lectures)
+add_subdirectory(LinearAlgebra)
